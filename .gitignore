@@ -1,4 +1,5 @@
 *.exe
 *.txt
 *.pdf
-linked*.c
+linked.c
+linkedin.c
