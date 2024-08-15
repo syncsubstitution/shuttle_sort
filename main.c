@@ -117,8 +117,8 @@ int main(void)
 
 int sorting(struct shuttle* compare1, struct shuttle* compare2){
     if(strcmp(compare1->MisName, compare2->MisName) > 0){
-    return 1;
+        return 1;
     }
     else 
-    return -1;
+        return -1;
 }
