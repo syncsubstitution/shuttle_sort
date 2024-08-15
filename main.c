@@ -61,7 +61,7 @@ void display_forward() {
 int main(void)
 {
     insert_at_head();
-    for (int i = 0; i < 135; i++){
+    for (int i = 0; i < 134; i++){
         insert_at_tail();
     }
 
@@ -71,6 +71,11 @@ int main(void)
     int read = 0;
 
     struct shuttle* current = head;
+    for (int i = 0; i < 2; i++)
+    {
+        fscanf(ptr, "%*[^\n]\n");
+    }
+    
     while (current != NULL) {
         read = fscanf(ptr, 
         "%d %*c %s %*c %s %*c %s %*c %s", 
@@ -82,12 +87,14 @@ int main(void)
         current = current->next;
     }
 
-        if (read != 5 && !feof(ptr)){
-            printf("error! - %d", read);
-            return 1;
-        }
+    
+    if (read != 5 && !feof(ptr)){
+        printf("error! - %d", read);
+        // return 1;
+    } 
+    
        
     fclose(ptr);
-    printf("%d", tail->prev->MisNr);
+    printf("%d\n%s", head->MisNr, tail->launchsite);
     return 0;
 }
