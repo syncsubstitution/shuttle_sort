@@ -6,10 +6,10 @@
 struct shuttle
 {
     int MisNr;
-    unsigned char date[256];
-    unsigned char MisName[256];
-    unsigned char orbiter[256];
-    unsigned char launchsite[256];
+    char date[256];
+    char MisName[256];
+    char orbiter[256];
+    char launchsite[256];
     struct shuttle* next;       
     struct shuttle* prev; 
 };
@@ -57,6 +57,7 @@ void display_forward() {
     printf("n");
 }
 
+int sorting(struct shuttle* compare1, struct shuttle* compare2);
 
 int main(void)
 {
@@ -92,9 +93,29 @@ int main(void)
         printf("error! - %d", read);
         // return 1;
     } 
-    
-       
     fclose(ptr);
+
+    struct shuttle* sort = head;
+    for (int sort1 = 0; sort1 < 135; sort1++){
+        struct shuttle* temp = sort;
+        printf("currently sorting: %s vs %s \n", sort->MisName, sort->next->MisName);
+        if (sorting(sort, sort->next) > 0)
+        {
+            strcpy(sort->MisName,temp->MisName);
+            strcpy(sort->next->MisName,sort->MisName);
+            strcpy(temp->MisName,sort->next->MisName);
+        }
+        sort = sort->next;
+    }
+    
     printf("%d\n%s", head->MisNr, tail->launchsite);
     return 0;
+}
+
+int sorting(struct shuttle* compare1, struct shuttle* compare2){
+    if(strcmp(compare1->MisName, compare2->MisName) > 0){
+    return 1;
+    }
+    else 
+    return -1;
 }

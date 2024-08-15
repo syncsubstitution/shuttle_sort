@@ -1,72 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-struct node* AddAtEnd(struct node* head, int data);
-struct node* AddToEmpty(struct node* head, int data);
-struct node* CreateList(struct node* head);
-
-struct node
+#include <string.h>
+#define size_of_array 5  //define size of the array
+ 
+//function to display array
+void display(char array[][30]){
+  for(int i=0; i<size_of_array; i++){
+    printf("%s ", array[i]);
+  }
+  printf("\n");
+}
+ 
+int main()
 {
-    struct node* prev;
-    int data;
-    struct node* next;
-};
+  //create an array of strings
+  char array[size_of_array][30];
 
-int main(void){
-    struct node* head = NULL;
-    struct node* ptr;
-    head = CreateList(head);
+  //Inputting names
+  printf("Enter %d Strings: \n", size_of_array);
+  for(int i=0; i<size_of_array; i++){
+    scanf("%s", array[i]);
+  }
 
-    ptr = head;
-    while (ptr != NULL)
-    {
-        printf("%d ", ptr->data);
-        ptr = ptr->prev;
+  //display the original array
+  printf("Original array: ");
+  display(array);
+
+  char temp[30];
+
+  //Sort array using the Buuble Sort algorithm
+  for(int i=0; i<size_of_array; i++){
+    for(int j=0; j<size_of_array-1-i; j++){
+      if(strcmp(array[j], array[j+1]) > 0){
+        //swap array[j] and array[j+1]
+        strcpy(temp, array[j]);
+        strcpy(array[j], array[j+1]);
+        strcpy(array[j+1], temp);
+      }
     }
-    return 0;
-}
+  }
 
-struct node* CreateList(struct node* head){
-    int n, data, i;
-    printf("No. of Nodes: ");
-    scanf("%d", &n);
+  //display the sorted array
+  printf("Sorted Array: ");
+  display(array);
 
-    printf("\nEnter Node 1 Data: ");
-    scanf("%d", &data);
-
-    head = AddToEmpty(head, data);
-
-    for (i = 1; i < n; i++)     
-    {
-        printf("\nEnter node %d data: ", i+1);
-        scanf("%d", &data);
-        head = AddAtEnd(head, data);
-    }
-    return head;
-}
-
-struct node* AddToEmpty(struct node* head, int data){
-    struct node* temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-    head = temp;
-    return head;
-}
-
-struct node* AddAtEnd(struct node* head, int data){
-    struct node* temp, *tp;
-    temp = malloc(sizeof(struct node));
-    temp->prev = NULL;
-    temp->data = data;
-    temp->next = NULL;
-
-    tp = head;
-
-    while(tp->next != NULL){
-        tp = tp->next;
-    }
-    tp->next = temp;
-    temp->prev = tp;
-    return head;
+  return 0;
 }
