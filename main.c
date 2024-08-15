@@ -96,18 +96,21 @@ int main(void)
     fclose(ptr);
 
     struct shuttle* sort = head;
-    for (int sort1 = 0; sort1 < 135; sort1++){
-        struct shuttle* temp = sort;
-        printf("currently sorting: %s vs %s \n", sort->MisName, sort->next->MisName);
+    struct shuttle* temp = head;
+    for(int sort2 = 0; sort2 < 135; sort2++){
+    for(int sort1 = 0; sort1 < 135; sort1++){
+        //printf("currently sorting: %s(%s) vs %s(%s) \n", temp->date, temp->MisName, sort->next->date, sort->next->MisName);
         if (sorting(sort, sort->next) > 0)
         {
+            printf("overwriting %s with %s \n", sort->MisName, sort->next->MisName);
             strcpy(sort->MisName,temp->MisName);
             strcpy(sort->next->MisName,sort->MisName);
             strcpy(temp->MisName,sort->next->MisName);
         }
         sort = sort->next;
     }
-    
+    }
+
     printf("%d\n%s", head->MisNr, tail->launchsite);
     return 0;
 }
