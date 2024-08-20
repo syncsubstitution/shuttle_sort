@@ -1,15 +1,18 @@
 #ifndef shuttle_H
 #define shuttle_H
 
-typedef struct shuttle
+
+
+struct shuttle
 {
     int MisNr;
-    unsigned char date[256];
-    unsigned char MisName[256];
-    int orbiter;
-    int launchsite;
-    struct shuttle *next;       
-    struct shuttle *previous;   
+    char date[256];
+    char MisName[256];
+    char orbiter[256];
+    char launchsite[256];
+    struct shuttle *next;
+    struct shuttle *prev;
 };
+
 
 #endif

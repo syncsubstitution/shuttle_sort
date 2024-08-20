@@ -1,48 +1,108 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define size_of_array 5  //define size of the array
- 
-//function to display array
-void display(char array[][30]){
-  for(int i=0; i<size_of_array; i++){
-    printf("%s ", array[i]);
-  }
-  printf("\n");
+
+struct shuttle
+{
+	char MisName[256];
+	struct shuttle *next;
+	struct shuttle *prev;
+};
+
+struct shuttle *head = NULL;
+struct shuttle *tail = NULL;
+
+struct shuttle *create_node()
+{
+	struct shuttle *new_node = (struct shuttle *)malloc(sizeof(struct shuttle));
+	new_node->next = NULL;
+	new_node->prev = NULL;
+	return new_node;
 }
- 
+
+void insert_at_head()
+{
+	struct shuttle *new_node = create_node();
+	if (head == NULL)
+	{
+		head = new_node;
+		tail = new_node;
+	}
+	else
+	{
+		new_node->next = head;
+		head->prev = new_node;
+		head = new_node;
+	}
+}
+
+void insert_at_tail()
+{
+	struct shuttle *new_node = create_node();
+	if (tail == NULL)
+	{
+		head = new_node;
+		tail = new_node;
+	}
+	else
+	{
+		new_node->prev = tail;
+		tail->next = new_node;
+		tail = new_node;
+	}
+}
+
+int compare(struct shuttle *compare1, struct shuttle *compare2)
+{
+	int result;
+	result = strcmp(compare1->MisName,compare2->MisName);
+	return result;
+}
+
 int main()
 {
-  //create an array of strings
-  char array[size_of_array][30];
+	insert_at_head();
+	for (int i = 0; i < 4; i++)
+	{
+		insert_at_tail();
+	}
 
-  //Inputting names
-  printf("Enter %d Strings: \n", size_of_array);
-  for(int i=0; i<size_of_array; i++){
-    scanf("%s", array[i]);
-  }
+  char test_v[5][25] = {"STS-35-B", "STS-99", "STS-35-A", "STS-2", "STS-101"};
+	struct shuttle* current = head;
+	for (int i = 0; i < 5; i++)
+	{
+		strcpy(current->MisName, test_v[i]);
+		current = current->next;
+	}
 
-  //display the original array
-  printf("Original array: ");
-  display(array);
 
-  char temp[30];
+	struct shuttle *sort1 = head;
+	struct shuttle *sort2 = head;
+	char temp[256];
+	for (int algo_count = 0; algo_count < 4; algo_count++)
+	{
+	struct shuttle *printhead = head;
+		sort2 = sort1->next;
+		int result = compare(sort1, sort2);
+		if (result > 0)
+		{
+			printf("-----------------------------------------------\n");
+			printf("head: %s, s1: %s, s2: %s, temp: %s\n", printhead->MisName, sort1->MisName, sort2->MisName, temp);
+			strcpy(temp,sort1->MisName);
+			printf("head: %s, s1: %s, s2: %s, temp: %s\n", printhead->MisName, sort1->MisName, sort2->MisName, temp);
+			strcpy(sort1->MisName,sort2->MisName);
+			printf("head: %s, s1: %s, s2: %s, temp: %s\n", printhead->MisName, sort1->MisName, sort2->MisName, temp);
+			strcpy(sort2->MisName,temp);
+			printf("head: %s, s1: %s, s2: %s, temp: %s\n", printhead->MisName, sort1->MisName, sort2->MisName, temp);
+		}
+		sort1 = sort1->next;
+		for(int i = 0; i < 5; i++){
+		    printf("%s, ", printhead->MisName);
+		    printhead = printhead->next;
+		}
+		printf("\n");
 
-  //Sort array using the Buuble Sort algorithm
-  for(int i=0; i<size_of_array; i++){
-    for(int j=0; j<size_of_array-1-i; j++){
-      if(strcmp(array[j], array[j+1]) > 0){
-        //swap array[j] and array[j+1]
-        strcpy(temp, array[j]);
-        strcpy(array[j], array[j+1]);
-        strcpy(array[j+1], temp);
-      }
-    }
-  }
+	}
 
-  //display the sorted array
-  printf("Sorted Array: ");
-  display(array);
-
-  return 0;
+	return 0;
 }
