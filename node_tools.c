@@ -56,9 +56,9 @@ void PrintFinal(struct shuttle* PrintHead){
     {
         Int_Print(print->MisNr, 13, 1, 1);
         Main_Print(print->date, 12, 1, 1);
-        Main_Print(print->MisName, 20, 1, 2);
-        Main_Print(print->orbiter, 10, 1, 1);
-        Main_Print(print->launchsite, 10, 0, 0);
+        Main_Print(print->MisName, 20, 1, 1);
+        Main_Print(print->orbiter, 11, 1, 1);
+        Main_Print(print->launchsite, 6, 0, 0);
         printf("\n");
         print = print->next;
     }

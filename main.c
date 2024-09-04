@@ -56,19 +56,15 @@ int main(void)
 
     int condition = 1;
     while(condition > 0){
-            condition = 1;
+        condition = 1;
         struct shuttle *sort1 = head;
         struct shuttle *sort2 = head;
-        char temp[25];
         for (int algo_count = 0; algo_count < 134; algo_count++)
         {
             sort2 = sort1->next;
             int result = compare(sort1, sort2);
             if (result > 0)
             {
-                /* strcpy(temp, sort1->MisName);
-                strcpy(sort1->MisName, sort2->MisName);
-                strcpy(sort2->MisName, temp); */
                 SwapData(sort1, sort2);
                 condition += result;
             }

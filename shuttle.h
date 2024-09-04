@@ -1,8 +1,6 @@
 #ifndef shuttle_H
 #define shuttle_H
 
-
-
 struct shuttle
 {
     int MisNr;
