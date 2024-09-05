@@ -56,10 +56,9 @@ int main(void)
 
     int condition = 1;
     while(condition > 0){
-            condition = 1;
+        condition = 1;
         struct shuttle *sort1 = head;
         struct shuttle *sort2 = head;
-        char temp[25];
         for (int algo_count = 0; algo_count < 134; algo_count++)
         {
             sort2 = sort1->next;
