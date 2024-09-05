@@ -8,7 +8,7 @@ void Int_Print(int var_int, int spaces, int bar, int bar_spaces);
 struct shuttle *tail = NULL;
 struct shuttle *head = NULL;
 
-struct shuttle *MakeNode()
+struct shuttle *MakeNode()              //used to create all nodes
 {
     struct shuttle *NewNode = (struct shuttle *)malloc(sizeof(struct shuttle));
     NewNode->next = NULL;
@@ -50,7 +50,7 @@ void NewTailNode()
 }
 
 void PrintFinal(struct shuttle* PrintHead){
-    struct shuttle* print = PrintHead;
+    struct shuttle* print = PrintHead;          //the first node to be printed
     printf("Missions-Nr. | Start-Datum | Missionsbezeichnung |  Orbiter   | Startrampe\n-------------------------------------------------------------------------\n");
     for (int printcount = 0; printcount < 135; printcount++)
     {
@@ -64,7 +64,7 @@ void PrintFinal(struct shuttle* PrintHead){
     }
 }
 
-void Main_Print(char* var_string, int spaces, int bar, int bar_spaces)
+void Main_Print(char* var_string, int spaces, int bar, int bar_spaces)      //ensured alignment with varying string length (copied from my previous fms task)
 {
     int length = 0;
     char* temp = var_string;
@@ -87,7 +87,7 @@ void Main_Print(char* var_string, int spaces, int bar, int bar_spaces)
     }
 } 
 
-void Int_Print(int var_int, int spaces, int bar, int bar_spaces)
+void Int_Print(int var_int, int spaces, int bar, int bar_spaces)    	    //same as Main_Print for variables of type int 
 {
     int length;
     if (var_int < 10)

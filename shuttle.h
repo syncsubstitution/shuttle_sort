@@ -1,5 +1,6 @@
 #ifndef shuttle_H
 #define shuttle_H
+//256 chosen as reliable max size, could be optimized
 
 struct shuttle
 {
