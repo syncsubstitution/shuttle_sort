@@ -66,9 +66,6 @@ int main(void)
             int result = compare(sort1, sort2);
             if (result > 0)
             {
-                /* strcpy(temp, sort1->MisName);
-                strcpy(sort1->MisName, sort2->MisName);
-                strcpy(sort2->MisName, temp); */
                 SwapData(sort1, sort2);
                 condition += result;
             }
