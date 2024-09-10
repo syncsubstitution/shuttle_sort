@@ -7,8 +7,13 @@ void PrintFinal(struct shuttle* NodeHead);
 struct shuttle* NewHeadNode();
 void NewTailNode();
 int ReadAndSort();
-void SwapData(struct shuttle *data1, struct shuttle* data2);
+void SwapData(struct shuttle *data1, struct shuttle *data2);
 int compare(struct shuttle *compare1, struct shuttle *compare2);
+
+int main(void)
+{
+    ReadAndSort();
+}
 
 struct shuttle *compare1 = NULL;
 struct shuttle *compare2 = NULL;
@@ -59,8 +64,8 @@ int ReadAndSort()
     int LoopCheck = 1;                  
     while(LoopCheck > 0){
         LoopCheck = 1;
-        struct shuttle *sort1 = head;
-        struct shuttle *sort2 = head;
+        struct shuttle* sort1 = head;
+        struct shuttle* sort2 = head;
         for (int algo_count = 0; algo_count < 134; algo_count++)
         {
             sort2 = sort1->next;
@@ -69,8 +74,10 @@ int ReadAndSort()
             {
                 SwapData(sort1, sort2);             //exchanges values of struct elements
                 LoopCheck += result;
+                sort1 = sort1;
             }
-            sort1 = sort1->next;
+            else
+            {sort1 = sort1->next;}
         }
         if (LoopCheck == 1)             //will only be 1 if nothing was added in line 71 (=no more sorting is to be done), so while-loop must end
         {

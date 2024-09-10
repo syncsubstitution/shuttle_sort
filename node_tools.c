@@ -8,7 +8,7 @@ void Int_Print(int var_int, int spaces, int bar, int bar_spaces);
 struct shuttle *tail = NULL;
 struct shuttle *head = NULL;
 
-struct shuttle *MakeNode()              //used to create all nodes
+struct shuttle *MakeNode()              //used to create all nodes, next and prev specified in NewHeadNode and NewTailNode
 {
     struct shuttle *NewNode = (struct shuttle *)malloc(sizeof(struct shuttle));
     NewNode->next = NULL;
@@ -50,7 +50,7 @@ void NewTailNode()
 }
 
 void PrintFinal(struct shuttle* PrintHead){
-    struct shuttle* print = PrintHead;          //the first node to be printed
+    struct shuttle* print = PrintHead;
     printf("Missions-Nr. | Start-Datum | Missionsbezeichnung |  Orbiter   | Startrampe\n-------------------------------------------------------------------------\n");
     for (int printcount = 0; printcount < 135; printcount++)
     {
@@ -64,7 +64,7 @@ void PrintFinal(struct shuttle* PrintHead){
     }
 }
 
-void Main_Print(char* var_string, int spaces, int bar, int bar_spaces)      //ensured alignment with varying string length (copied from my previous fms task)
+void Main_Print(char* var_string, int spaces, int bar, int bar_spaces)      //ensures alignment with varying string length (copied from my previous fms task)
 {
     int length = 0;
     char* temp = var_string;
@@ -111,29 +111,17 @@ void Int_Print(int var_int, int spaces, int bar, int bar_spaces)    	    //same 
     }
 }
 
-void SwapData(struct shuttle *data1, struct shuttle *data2){
-    int NumTemp = data1->MisNr;
-    data1->MisNr = data2->MisNr;
-    data2->MisNr = NumTemp;
-    char temp[25];
-    strcpy(temp, data1->date);
-    strcpy(data1->date, data2->date);
-    strcpy(data2->date, temp);
-    for(int i = 0; i <strlen(temp); i++)
-    {temp[i] = 0;}
-    strcpy(temp, data1->MisName);
-    strcpy(data1->MisName, data2->MisName);
-    strcpy(data2->MisName, temp);
-    for(int i = 0; i < strlen(temp);i++)
-    {temp[i] = 0;}
-    strcpy(temp, data1->orbiter);
-    strcpy(data1->orbiter, data2->orbiter);
-    strcpy(data2->orbiter, temp);
-    for(int i = 0; i < strlen(temp); i++)
-    {temp[i] = 0;}
-    strcpy(temp, data1->launchsite);
-    strcpy(data1->launchsite, data2->launchsite);
-    strcpy(data2->launchsite, temp);
-    for(int i = 0; i < strlen(temp); i++)
-    {temp[i] = 0;}
+void SwapNodes(struct shuttle *data1, struct shuttle *data2){               //sorts nodes by redirecting pointers
+    if(data1->prev != NULL)
+    {data1->prev->next = data2;}
+    else
+    {head = data2;}
+    if(data2->next != NULL)
+    {data2->next->prev = data1;}
+    else
+    {tail = data1;}
+    data1->next  = data2->next;
+    data2->prev = data1->prev;
+    data2->next = data1;
+    data1->prev = data2;
 }
